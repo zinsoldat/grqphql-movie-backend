@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 // Construct a schema, using GraphQL schema language
 const typeDef = gql`
-  type Query {
+  type Movie {
     title: String
     year: Int
     rating: Float
