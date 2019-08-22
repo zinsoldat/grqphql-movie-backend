@@ -1,0 +1,8 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "scoutbase code challenge",
+  "main": "index.js",
+  "author": "Rene Schmitt",
+  "license": "MIT"
+}
