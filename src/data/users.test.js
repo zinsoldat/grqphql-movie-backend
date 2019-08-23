@@ -36,7 +36,9 @@ describe("users test", () => {
     it("should return an existing user", () => {
       users.createUser(testUser);
       const result = users.getUser(testUser.username);
-      expect(result).toBe(testUser);
+      expect(result.username).toEqual(testUser.username);
+      expect(result.password).toEqual(testUser.password);
+      expect(result.id).toBeDefined();
     });
     
     it("should throw an error if the user does not exist", () => {

@@ -1,3 +1,4 @@
+const uuid = require("uuid");
 let users = [];
 
 module.exports = {
@@ -16,8 +17,11 @@ module.exports = {
     try {
       this.getUser(user.username);
     } catch(error) {
+      // copy user to not change the `user` parameter
+      const newUser = Object.assign({}, user);
+      newUser.id = uuid.v4();
       // user does not exist -> create the user
-      return users.push(user);
+      return users.push(newUser);
     }
     throw new Error(`user ${user.username} already exists`);
   },
