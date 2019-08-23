@@ -10,10 +10,17 @@ const dateScalarType = new GraphQLScalarType({
   name: "Date",
   description: "Date formatted as ISO string",
   serialize(value) {
-    return value.toISOString();
+    if(value instanceof Date) {
+      return value.toISOString();
+    }
+    return null;
   },
   parseValue(value) {
-    return new Date(value);
+    if(typeof value === "string") {
+      const parsedValue = new Date(value);
+      return isNaN(parsedValue) ? null : parsedValue;
+    }
+    return null;
   },
   parseLiteral(ast) {
     if(ast.kind === Kind.STRING) {
