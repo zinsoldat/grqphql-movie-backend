@@ -3,25 +3,25 @@ module.exports = {
     return [
       {
         name: "Leonardo DiCaprio",
-        birthday: new Date(),
+        birthday: new Date(1974, 11, 11),
         country: "USA",
         movies: ["Inception",],
       },
       {
         name: "Joseph Gordon-Levitt",
-        birthday: new Date(),
+        birthday: new Date(1981, 2, 17),
         country: "USA",
         movies: ["Inception",],
       },
       {
         name: "Ellen Page",
-        birthday: new Date(),
+        birthday: new Date(1987, 2, 21),
         country: "Canada",
         movies: ["Inception",],
       },
       {
         name: "Tom Hardy",
-        birthday: new Date(),
+        birthday: new Date(1977, 9, 15),
         country: "UK",
         movies: ["Inception",],
       },
