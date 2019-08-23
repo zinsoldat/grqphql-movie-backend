@@ -1,4 +1,6 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
+
+const actorsData = require("../data/actors");
 
 // Construct a schema, using GraphQL schema language
 const typeDef = gql`
@@ -10,6 +12,16 @@ const typeDef = gql`
   }
 `;
 
+const resolvers = {
+  Movie: {
+    actors(movie) {
+      return actorsData.getActors()
+        .filter((actor) => (actor.movies.includes(movie.title)));
+    }
+  },
+};
+
 module.exports = {
   typeDef,
-}
+  resolvers,
+};
