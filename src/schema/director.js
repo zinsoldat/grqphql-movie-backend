@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 // Construct a schema, using GraphQL schema language
 const typeDef = gql`
@@ -9,6 +9,15 @@ const typeDef = gql`
   }
 `;
 
+const resolvers = {
+  Director: {
+    birthday(director) {
+      // return directors for all movies the actor had a role
+      return  director.birthday.toISOString();
+    }
+  }
+};
+
 module.exports = {
   typeDef,
-}
+};
