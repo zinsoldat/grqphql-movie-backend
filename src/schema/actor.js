@@ -14,9 +14,6 @@ const typeDef = gql`
 
 const resolvers = {
   Actor: {
-    birthday(actor) {
-      return actor.birthday.toISOString();
-    },
     directors(actor) {
       // return directors for all movies the actor had a role
       return directorsData.getDirectors()

@@ -10,14 +10,10 @@ const typeDef = gql`
 `;
 
 const resolvers = {
-  Director: {
-    birthday(director) {
-      // return directors for all movies the actor had a role
-      return  director.birthday.toISOString();
-    }
-  }
+  Director: {}
 };
 
 module.exports = {
   typeDef,
+  resolvers,
 };
