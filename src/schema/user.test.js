@@ -26,5 +26,26 @@ describe("user", () => {
         expect(createdUser.password).not.toEqual(testUser.password);
       });
     });
+    describe("login", () => {
+      const resolver = user.resolvers.Mutation.login;
+      const createUser = user.resolvers.Mutation.createUser;
+      it("should return the token and user for a valid authentication", async () => {
+        const contextMockObject = contextMock.createContext();
+        await createUser(
+          {},
+          testUser,
+          contextMockObject,
+        );
+        const result = await resolver(
+          {},
+          testUser,
+          contextMockObject,
+        );
+        
+        expect(result.token).toBeDefined();
+        expect(result.user.id).toBeDefined();
+        expect(result.user.name).toEqual(testUser.username);
+      });
+    });
   });
 });
