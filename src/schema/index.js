@@ -4,6 +4,7 @@ const { GraphQLScalarType, Kind } = require("graphql");
 const actor = require("./actor");
 const director = require("./director");
 const movie = require("./movie");
+const user = require("./user");
 
 const dateScalarType = new GraphQLScalarType({
   name: "Date",
@@ -51,12 +52,14 @@ module.exports = {
     actor.typeDef,
     director.typeDef,
     movie.typeDef,
+    user.typeDef,
     typeDef,
   ],
   resolvers: Object.assign(
     resolvers, 
     movie.resolvers, 
     actor.resolvers, 
-    director.resolvers
+    director.resolvers,
+    user.resolvers
   ),
 };

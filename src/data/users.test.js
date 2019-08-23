@@ -50,4 +50,22 @@ describe("users test", () => {
       }
     });
   });
+  
+  describe("getUserByToken", () => {
+    it("should return an existing user", () => {
+      const createdUser = users.createUser(testUser);
+      const result = users.getUserByToken(createdUser.token);
+      
+      expect(result.username).toEqual(createdUser.username);
+    });
+    
+    it("should throw an error if the user does not exist", () => {
+      try {
+        users.getUser(users.createToken());
+        fail("should have thrown an error");
+      } catch(error) {
+        expect(error).toBeDefined();
+      }
+    });
+  });
 });
