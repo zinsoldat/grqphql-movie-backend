@@ -1,7 +1,5 @@
 const { gql } = require("apollo-server-express");
 
-const directorsData = require("../data/directors");
-
 const typeDef = gql`
   type Actor {
     name: String
@@ -14,9 +12,9 @@ const typeDef = gql`
 
 const resolvers = {
   Actor: {
-    directors(actor) {
+    directors(actor, args, context) {
       // return directors for all movies the actor had a role
-      return directorsData.getDirectors()
+      return context.model.director.getDirectors()
         .filter((director) => {
           const moviesWorkedTogether = director.movies.filter((movie) => (actor.movies.includes(movie)));
           return moviesWorkedTogether.length > 0;

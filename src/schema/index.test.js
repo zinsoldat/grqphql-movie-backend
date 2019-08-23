@@ -2,13 +2,19 @@ const { Kind } = require("graphql");
 
 const index = require("./index");
 const moviesData = require("../data/movies");
+const contextMock = require("../mocks/context.mock");
 
 describe("index", () => {
   describe("resolvers", () => {
     describe("movies", () => {
       const resolver = index.resolvers.Query.movies;
       it("should return all movies", () => {
-        expect(resolver().length).toEqual(moviesData.getMovies().length);
+        const result = resolver(
+          {},
+          {},
+          contextMock.createContext()
+        );
+        expect(result.length).toEqual(moviesData.getMovies().length);
       });
     });
   });

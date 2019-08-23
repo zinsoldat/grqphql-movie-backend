@@ -1,6 +1,7 @@
 const movie = require("./movie");
 const moviesData = require("../data/movies");
 const actorsData = require("../data/actors");
+const contextMock = require("../mocks/context.mock");
 
 describe("movie", () => {
   describe("resolvers", () => {
@@ -9,7 +10,11 @@ describe("movie", () => {
       it("should get all actors who played a role in the movie", () => {
         const movie = moviesData.getMovies()[0];
         const expectedActors = actorsData.getActors().filter((actor) => (actor.movies.includes(movie.title)));
-        const actors = resolver(movie);
+        const actors = resolver(
+          movie,
+          {},
+          contextMock.createContext()
+        );
         
         expect(actors.length).toEqual(expectedActors.length);
         actors.forEach((actor) => {
@@ -18,9 +23,13 @@ describe("movie", () => {
       });
       
       it("should return an empty array in case no actor played in the movie", () => {
-        const movie = moviesData.getMovies()[0];
+        const movie = moviesData.getMovies(null, {}, contextMock.createContext())[0];
         movie.title = "Test Movie 1234";
-        const actors = resolver(movie);
+        const actors = resolver(
+          movie,
+          {},
+          contextMock.createContext()
+        );
         expect(actors.length).toEqual(0);
       });
     });

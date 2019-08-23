@@ -4,7 +4,6 @@ const { GraphQLScalarType, Kind } = require("graphql");
 const actor = require("./actor");
 const director = require("./director");
 const movie = require("./movie");
-const movieData = require("../data/movies");
 
 const dateScalarType = new GraphQLScalarType({
   name: "Date",
@@ -30,7 +29,6 @@ const dateScalarType = new GraphQLScalarType({
   },
 });
 
-// Construct a schema, using GraphQL schema language
 const typeDef = gql`
   type Query {
     movies: [Movie]
@@ -41,8 +39,8 @@ const typeDef = gql`
 
 const resolvers = {
   Query: {
-    movies() {
-      return movieData.getMovies();
+    movies(parent, args, context) {
+      return context.model.movie.getMovies();
     },
   },
   Date: dateScalarType,
@@ -55,5 +53,10 @@ module.exports = {
     movie.typeDef,
     typeDef,
   ],
-  resolvers: Object.assign(resolvers, movie.resolvers, actor.resolvers, director.resolvers),
+  resolvers: Object.assign(
+    resolvers, 
+    movie.resolvers, 
+    actor.resolvers, 
+    director.resolvers
+  ),
 };
