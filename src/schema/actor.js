@@ -14,7 +14,7 @@ const resolvers = {
   Actor: {
     directors(actor, args, context) {
       // return directors for all movies the actor had a role
-      return context.model.director.getDirectors()
+      return context.data.director.getDirectors()
         .filter((director) => {
           const moviesWorkedTogether = director.movies.filter((movie) => (actor.movies.includes(movie)));
           return moviesWorkedTogether.length > 0;

@@ -18,7 +18,7 @@ const resolvers = {
       return Math.floor(Math.random() * (90 - 50) + 50)/10;
     },
     actors(movie, args, context) {
-      return context.model.actor.getActors()
+      return context.data.actor.getActors()
         .filter((actor) => (actor.movies.includes(movie.title)));
     }
   },

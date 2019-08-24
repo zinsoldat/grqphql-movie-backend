@@ -34,7 +34,7 @@ const resolvers = {
         password: await hashPassword(args.password),
       };
       try {
-        const createdUser = context.model.user.createUser(user);
+        const createdUser = context.data.user.createUser(user);
         return { 
           token: createdUser.token, 
           user: { name: createdUser.username, id: createdUser.id},
@@ -46,7 +46,7 @@ const resolvers = {
     
     async login(parent, args, context) {
       try {
-        const user = context.model.user.getUser(args.username);
+        const user = context.data.user.getUser(args.username);
         const matches = await bcrypt.compare(args.password, user.password);
         if(matches) {
           return { 

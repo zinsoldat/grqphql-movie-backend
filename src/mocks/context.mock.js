@@ -10,7 +10,7 @@ module.exports = {
       auth: {
         user: {},
       },
-      model: {
+      data: {
         user: usersData,
         actor: actorsData,
         movie: moviesData,

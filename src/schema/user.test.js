@@ -16,7 +16,7 @@ describe("user", () => {
           testUser,
           contextMockObject,
         );
-        const createdUser = contextMockObject.model.user.getUser(testUser.username);
+        const createdUser = contextMockObject.data.user.getUser(testUser.username);
         
         expect(result.token).toBeDefined();
         expect(result.user.id).toBeDefined();

@@ -45,7 +45,7 @@ const typeDef = gql`
 const resolvers = {
   Query: {
     movies(parent, args, context) {
-      return context.model.movie.getMovies();
+      return context.data.movie.getMovies();
     },
   },
   Date: dateScalarType,
