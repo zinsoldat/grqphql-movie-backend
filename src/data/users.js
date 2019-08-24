@@ -53,6 +53,15 @@ class UsersData {
     throw new Error(`user ${user.username} already exists`);
   }
   
+  updateToken(username) {
+    const usersMatch = this.users.filter((u) => u.username === username);
+    if (usersMatch.length !== 1) {
+      throw Error("user does not exist");
+    }
+    usersMatch[0].token = this.createToken();
+    return Object.assign({}, usersMatch[0]);
+  }
+  
   createToken() {
     const token = crypto.randomBytes(30).toString("hex");
     // check if a token already exists. A token needs to be unique

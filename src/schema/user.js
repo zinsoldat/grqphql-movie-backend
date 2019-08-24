@@ -27,11 +27,11 @@ const typeDef = gql`
 
 const resolvers = {
   Mutation: {
-    async createUser(parent, args, context) {
+    async createUser(parent, { username, password }, context) {
       const user = {
-        username: args.username,
+        username: username,
         // hash password as soon as possible
-        password: await hashPassword(args.password),
+        password: await hashPassword(password),
       };
       try {
         const createdUser = context.data.user.createUser(user);
@@ -44,11 +44,12 @@ const resolvers = {
       }
     },
     
-    async login(parent, args, context) {
+    async login(parent, { username, password }, context) {
       try {
-        const user = context.data.user.getUser(args.username);
-        const matches = await bcrypt.compare(args.password, user.password);
+        let user = context.data.user.getUser(username);
+        const matches = await bcrypt.compare(password, user.password);
         if(matches) {
+          user = context.data.user.updateToken(username);
           return { 
             token: user.token, 
             user: { name: user.username, id: user.id},
