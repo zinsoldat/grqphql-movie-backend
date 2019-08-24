@@ -1,32 +1,32 @@
 const actor = require("./actor");
-const actorsData = require("../data/actors");
-const moviesData = require("../data/movies");
-const directorsData = require("../data/directors");
+const ActorsData = require("../data/actors");
+const MoviesData = require("../data/movies");
+const DirectorsData = require("../data/directors");
 const contextMock = require("../mocks/context.mock");
 
 describe("actor", () => {
-  let movies;
-  let actors;
-  let directors;
+  let moviesData;
+  let actorsData;
+  let directorsData;
   beforeEach(() => {
-    movies = new moviesData.MovieData();
-    actors = new actorsData.ActorData();
-    directors = new directorsData.DirectorsData();
+    moviesData = new MoviesData();
+    actorsData = new ActorsData();
+    directorsData = new DirectorsData();
   });
   describe("resolvers", () => {
     describe("directors", () => {
       const resolver = actor.resolvers.Actor.directors;
       it("should get all directors", () => {
         const result = resolver(
-          {movies: movies.getMovies().map((movie) => movie.title)},
+          {movies: moviesData.getMovies().map((movie) => movie.title)},
           {},
           contextMock.createContext()
         );
-        expect(result.length).toEqual(directors.getDirectors().length);
+        expect(result.length).toEqual(directorsData.getDirectors().length);
       });
       
       it("should get all directors of movies the actor played in", () => {
-        const testActor = actors.getActors()[0];
+        const testActor = actorsData.getActors()[0];
         const result = resolver(
           testActor,
           {},

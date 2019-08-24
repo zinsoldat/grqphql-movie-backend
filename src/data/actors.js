@@ -103,7 +103,7 @@ function getActors() {
   ];
 }
 
-class ActorData {
+class ActorsData {
   constructor() {
     this._actors = getActors();
   }
@@ -125,6 +125,4 @@ class ActorData {
   }
 }
 
-module.exports = {
-  ActorData,
-};
+module.exports = ActorsData;

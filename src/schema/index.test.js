@@ -1,13 +1,13 @@
 const { Kind } = require("graphql");
 
 const index = require("./index");
-const moviesData = require("../data/movies");
+const MoviesData = require("../data/movies");
 const contextMock = require("../mocks/context.mock");
 
 describe("index", () => {
-  let movies;
+  let moviesData;
   beforeEach(() => {
-    movies = new moviesData.MovieData();
+    moviesData = new MoviesData();
   });
   describe("resolvers", () => {
     describe("movies", () => {
@@ -18,7 +18,7 @@ describe("index", () => {
           {},
           contextMock.createContext()
         );
-        expect(result.length).toEqual(movies.getMovies().length);
+        expect(result.length).toEqual(moviesData.getMovies().length);
       });
     });
   });

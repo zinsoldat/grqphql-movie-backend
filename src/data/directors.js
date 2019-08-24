@@ -48,6 +48,4 @@ class DirectorsData {
   }
 }
 
-module.exports = {
-  DirectorsData
-};
+module.exports = DirectorsData;

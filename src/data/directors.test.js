@@ -1,12 +1,12 @@
-const directorsDataClass = require("./directors");
-const moviesDataClass = require("./movies");
+const DirectorsData = require("./directors");
+const MoviesData = require("./movies");
 
 describe("directors test", () => {
   let directorData;
   let moviesData;
   beforeEach(() => {
-    directorData = new directorsDataClass.DirectorsData();
-    moviesData = new moviesDataClass.MovieData();
+    directorData = new DirectorsData();
+    moviesData = new MoviesData();
   });
   describe("getDirectors", () => {
     it("should return all directors", () => {

@@ -27,7 +27,7 @@ function getMovies() {
   ];
 }
 
-class MovieData {
+class MoviesData {
   constructor() {
     this._movies = getMovies();
   }
@@ -49,6 +49,4 @@ class MovieData {
   }
 }
 
-module.exports = {
-  MovieData,
-};
+module.exports = MoviesData;

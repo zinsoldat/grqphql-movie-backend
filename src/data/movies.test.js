@@ -1,9 +1,9 @@
-const moviesDataClass = require("./movies");
+const MoviesData = require("./movies");
 
 describe("movies test", () => {
   let movieData;
   beforeEach(() => {
-    movieData = new moviesDataClass.MovieData();
+    movieData = new MoviesData();
   });
   describe("getMovies", () => {
     it("should return all movies", () => {

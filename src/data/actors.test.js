@@ -1,9 +1,9 @@
-const actorsDataClass = require("./actors");
+const ActorsData = require("./actors");
 
 describe("actors test", () => {
   let actorData;
   beforeEach(() => {
-    actorData = new actorsDataClass.ActorData();
+    actorData = new ActorsData();
   });
   describe("getActors", () => {
     it("should return all actors", () => {

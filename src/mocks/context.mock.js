@@ -1,8 +1,8 @@
 
 const UsersData = require("../data/users");
-const actorsData = require("../data/actors");
-const moviesData = require("../data/movies");
-const directorsData = require("../data/directors");
+const ActorsData = require("../data/actors");
+const MoviesData = require("../data/movies");
+const DirectorsData = require("../data/directors");
 
 module.exports = {
   createContext() {
@@ -12,9 +12,9 @@ module.exports = {
       },
       data: {
         user: new UsersData(),
-        actor: new actorsData.ActorData(),
-        movie: new moviesData.MovieData(),
-        director: new directorsData.DirectorsData(),
+        actor: new ActorsData(),
+        movie: new MoviesData(),
+        director: new DirectorsData(),
       }
     };
   },
