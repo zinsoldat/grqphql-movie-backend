@@ -1,9 +1,12 @@
 const ActorsData = require("./actors");
+const MoviesData = require("./movies");
 
 describe("actors test", () => {
   let actorData;
+  let moviesData;
   beforeEach(() => {
     actorData = new ActorsData();
+    moviesData = new MoviesData();
   });
   describe("getActors", () => {
     it("should return all actors", () => {
@@ -40,6 +43,20 @@ describe("actors test", () => {
       } catch(error) {
         expect(error).toBeDefined();
       }
+    });
+  });
+  
+  describe("getActorsByMovie", () => {
+    
+    it("should return all actors", () => {
+      const movie = moviesData.getMovies()[0];
+      const result = actorData.getActorsByMovie(movie.title);
+      expect(result.length).toEqual(4); // ToDo: do not use a hard coded value
+    });
+    
+    it("should return empty array if no movies match", () => {
+      const result = actorData.getActorsByMovie("not a valid movie");
+      expect(result.length).toEqual(0); // ToDo: do not use a hard coded value
     });
   });
   

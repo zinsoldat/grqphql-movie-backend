@@ -123,6 +123,11 @@ class ActorsData {
     }
     return Object.assign({}, actorsMatch[0]);
   }
+  getActorsByMovie(title) {
+    const actorsMatch = this._actors.filter((actor) => actor.movies.includes(title))
+      .map((actor => Object.assign({}, actor)));
+    return actorsMatch;
+  }
 }
 
 module.exports = ActorsData;
