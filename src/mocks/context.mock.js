@@ -12,9 +12,9 @@ module.exports = {
       },
       data: {
         user: usersData,
-        actor: actorsData,
+        actor: new actorsData.ActorData(),
         movie: new moviesData.MovieData(),
-        director: directorsData,
+        director: new directorsData.DirectorsData(),
       }
     };
   },
