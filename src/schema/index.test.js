@@ -5,6 +5,10 @@ const moviesData = require("../data/movies");
 const contextMock = require("../mocks/context.mock");
 
 describe("index", () => {
+  let movies;
+  beforeEach(() => {
+    movies = new moviesData.MovieData();
+  });
   describe("resolvers", () => {
     describe("movies", () => {
       const resolver = index.resolvers.Query.movies;
@@ -14,7 +18,7 @@ describe("index", () => {
           {},
           contextMock.createContext()
         );
-        expect(result.length).toEqual(moviesData.getMovies().length);
+        expect(result.length).toEqual(movies.getMovies().length);
       });
     });
   });

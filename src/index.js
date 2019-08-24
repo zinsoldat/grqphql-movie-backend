@@ -16,10 +16,10 @@ const server = new ApolloServer({
     auth: {
       user: getAuthenticatedUser(req.headers.authorization),
     },
-    model: {
+    data: {
       user: usersData,
       actor: actorsData,
-      movie: moviesData,
+      movie: new moviesData.MovieData(),
       director: directorsData,
     }
   }),

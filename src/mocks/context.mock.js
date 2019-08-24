@@ -13,7 +13,7 @@ module.exports = {
       data: {
         user: usersData,
         actor: actorsData,
-        movie: moviesData,
+        movie: new moviesData.MovieData(),
         director: directorsData,
       }
     };

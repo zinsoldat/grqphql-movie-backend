@@ -5,12 +5,16 @@ const directorsData = require("../data/directors");
 const contextMock = require("../mocks/context.mock");
 
 describe("actor", () => {
+  let movies;
+  beforeEach(() => {
+    movies = new moviesData.MovieData();
+  });
   describe("resolvers", () => {
     describe("directors", () => {
       const resolver = actor.resolvers.Actor.directors;
       it("should get all directors", () => {
         const directors = resolver(
-          {movies: moviesData.getMovies().map((movie) => movie.title)},
+          {movies: movies.getMovies().map((movie) => movie.title)},
           {},
           contextMock.createContext()
         );
