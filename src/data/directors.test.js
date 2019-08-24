@@ -58,4 +58,18 @@ describe("directors test", () => {
       expect(result.length).toEqual(0); // ToDo: do not use a hard coded value
     });
   });
+  
+  describe("getDirectorsByMovies", () => {
+    
+    it("should return all directors", () => {
+      const movies = moviesData.getMovies();
+      const result = directorData.getDirectorsByMovies(movies.map((movie) => movie.title));
+      expect(result.length).toEqual(directorData.getDirectors().length);
+    });
+    
+    it("should return empty array if no movies match", () => {
+      const result = directorData.getDirectorsByMovie([]);
+      expect(result.length).toEqual(0); // ToDo: do not use a hard coded value
+    });
+  });
 });

@@ -46,6 +46,14 @@ class DirectorsData {
       .map((director => Object.assign({}, director)));
     return directorsMatch;
   }
+  getDirectorsByMovies(titles) {
+    const directorsMatch = this._directors.filter((director) => {
+        const moviesDirected = director.movies.filter((movie) => (titles.includes(movie)));
+        return moviesDirected.length > 0;
+      })
+      .map((director => Object.assign({}, director)));
+    return directorsMatch;
+  }
 }
 
 module.exports = DirectorsData;
