@@ -1,26 +1,42 @@
 const uuid = require("uuid");
 const crypto = require("crypto");
-let users = [];
 
-module.exports = {
+class UsersData {
+  constructor() {
+    this.users = [];
+  }
+  
   getUsers() {
     // return copy to avaid side effects
-    return users.concat();
-  },
+    return this.users.map((user => Object.assign({}, user)));
+  }
+  
+  getUsersByUsernames(usernames) {
+    return this.users.filter((user) => usernames.includes(user.username))
+      .map((user => Object.assign({}, user)));
+  }
+  
+  getUsersByTokens(tokens) {
+    return this.users.filter((user) => tokens.includes(user.token))
+      .map((user => Object.assign({}, user)));
+  }
+  
   getUser(username) {
-    const usersMatch = users.filter((u) => u.username === username);
+    const usersMatch = this.users.filter((u) => u.username === username);
     if (usersMatch.length !== 1) {
       throw Error("user does not exist");
     }
-    return usersMatch[0];
-  },
+    return Object.assign({}, usersMatch[0]);
+  }
+  
   getUserByToken(token) {
-    const usersMatch = users.filter((u) => u.token === token);
+    const usersMatch = this.users.filter((u) => u.token === token);
     if (usersMatch.length !== 1) {
       throw Error("token already exists");
     }
-    return usersMatch[0];
-  },
+    return Object.assign({}, usersMatch[0]);
+  }
+  
   createUser(user) {
     try {
       this.getUser(user.username);
@@ -31,15 +47,12 @@ module.exports = {
       // tokens are generated once in this implementation. They do not have an expire date
       newUser.token = this.createToken();
       // user does not exist -> create the user
-      users.push(newUser);
+      this.users.push(newUser);
       return newUser;
     }
     throw new Error(`user ${user.username} already exists`);
-  },
-  drop() {
-    users = [];
-  },
-
+  }
+  
   createToken() {
     const token = crypto.randomBytes(30).toString("hex");
     // check if a token already exists. A token needs to be unique
@@ -52,4 +65,6 @@ module.exports = {
       return token;
     }
   }
-};
+}
+
+module.exports = UsersData;

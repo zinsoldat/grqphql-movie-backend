@@ -3,11 +3,11 @@ const { ApolloServer } = require("apollo-server-express");
 const { makeExecutableSchema } = require("graphql-tools");
 
 const schema = require("./schema/index");
-const usersData = require("./data/users");
+const UsersData = require("./data/users");
 const actorsData = require("./data/actors");
 const moviesData = require("./data/movies");
 const directorsData = require("./data/directors");
-
+const user = new UsersData();
 const server = new ApolloServer({ 
   // typeDefs: schema.typeDefs, 
   // resolvers: schema.resolvers,
@@ -17,7 +17,7 @@ const server = new ApolloServer({
       user: getAuthenticatedUser(req.headers.authorization),
     },
     data: {
-      user: usersData,
+      user,
       actor: new actorsData.ActorData(),
       movie: new moviesData.MovieData(),
       director: new directorsData.DirectorsData(),
@@ -32,7 +32,7 @@ function getAuthenticatedUser(authHeader) {
   if(authHeader) {
     const token = authHeader.substr("Bearer ".length);
     try {
-      user = usersData.getUserByToken(token);
+      user = user.getUserByToken(token);
     } catch(error) {
       // do net set a user
     }
