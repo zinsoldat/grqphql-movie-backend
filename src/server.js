@@ -8,12 +8,14 @@ const ActorsData = require("./data/actors");
 const MoviesData = require("./data/movies");
 const DirectorsData = require("./data/directors");
 
+const userData = new UsersData();
+
 function getAuthenticatedUser(authHeader) {
   let user = null;
   if(authHeader) {
     const token = authHeader.substr("Bearer ".length);
     try {
-      user = user.getUserByToken(token);
+      user = userData.getUserByToken(token);
     } catch(error) {
       // do net set a user
     }
@@ -22,8 +24,6 @@ function getAuthenticatedUser(authHeader) {
 }
 
 function start(serverConfig) {
-
-  const user = new UsersData();
   const server = new ApolloServer({ 
     // typeDefs: schema.typeDefs, 
     // resolvers: schema.resolvers,
@@ -34,7 +34,7 @@ function start(serverConfig) {
           user: getAuthenticatedUser(req.headers.authorization),
         },
         data: {
-          user,
+          user: userData,
           actor: new ActorsData(),
           movie: new MoviesData(),
           director: new DirectorsData(),
