@@ -6,6 +6,8 @@ const director = require("./director");
 const movie = require("./movie");
 const user = require("./user");
 
+const { AuthDirective } = require("../directives/auth");
+
 const dateScalarType = new GraphQLScalarType({
   name: "Date",
   description: "Date formatted as ISO string",
@@ -31,11 +33,13 @@ const dateScalarType = new GraphQLScalarType({
 });
 
 const typeDef = gql`
+  directive @auth on FIELD_DEFINITION
+
+  scalar Date
+  
   type Query {
     movies: [Movie]
   }
-  
-  scalar Date
 `;
 
 const resolvers = {
@@ -47,6 +51,8 @@ const resolvers = {
   Date: dateScalarType,
 };
 
+
+
 module.exports = {
   typeDefs: [
     actor.typeDef,
@@ -55,8 +61,11 @@ module.exports = {
     user.typeDef,
     typeDef,
   ],
+  schemaDirectives: {
+    auth: AuthDirective
+  },
   resolvers: Object.assign(
-    resolvers, 
+    resolvers,
     movie.resolvers, 
     actor.resolvers, 
     director.resolvers,
