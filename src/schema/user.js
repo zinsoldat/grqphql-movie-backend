@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express");
+const { gql, ApolloError } = require("apollo-server-express");
 const bcrypt = require("bcrypt");
 
 const typeDef = gql`
@@ -40,7 +40,7 @@ const resolvers = {
           user: { name: createdUser.username, id: createdUser.id},
         };
       } catch(error) {
-        // ToDo: Error handling in graphql
+        new ApolloError(error.message);
       }
     },
     
@@ -55,7 +55,7 @@ const resolvers = {
           };
         }
       } catch(error) {
-        // ToDo: Error handling in graphql
+        new ApolloError(error.message);
       }
     }
   }
