@@ -23,8 +23,10 @@ function getAuthenticatedUser(authHeader) {
   return user;
 }
 
+let app;
+let server;
 function start(serverConfig) {
-  const server = new ApolloServer({ 
+  const apolloServer = new ApolloServer({ 
     // typeDefs: schema.typeDefs, 
     // resolvers: schema.resolvers,
     schema: makeExecutableSchema(schema),
@@ -45,21 +47,43 @@ function start(serverConfig) {
     playground: process.env.NODE_ENV !== "production",
     tracing: process.env.NODE_ENV !== "production",
   });
-  const app = express();
-  server.applyMiddleware({ 
+  app = express();
+  apolloServer.applyMiddleware({ 
     app, 
     async onHealthCheck () {
       return true;
     },
   });
   
-  app.listen({ port: serverConfig.port }, () => {
+  
+  server = app.listen({ port: serverConfig.port }, () => {
     console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
     console.log(
       `Try your health check at: ${server.graphqlPath}.well-known/apollo/server-health`,
     );
+    addShutdownHandlers();
   });
   
+}
+
+// Do graceful shutdown
+function shutdown() {
+  console.log("graceful shutdown express");
+  server.close(function () {
+    console.log("Closed server");
+  });
+}
+
+function addShutdownHandlers() {
+  //do something when app is closing
+  process.on("exit", shutdown);
+
+  //catches ctrl+c event
+  process.on("SIGINT", shutdown);
+
+  // catches "kill pid" (for example: nodemon restart)
+  process.on("SIGUSR1", shutdown);
+  process.on("SIGUSR2", shutdown);
 }
 
 module.exports = {
