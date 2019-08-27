@@ -1,8 +1,8 @@
 const actor = require("./actor");
-const ActorsData = require("../data/actors");
-const MoviesData = require("../data/movies");
-const DirectorsData = require("../data/directors");
-const contextMock = require("../mocks/context.mock");
+const ActorsData = require("../../data/actors");
+const MoviesData = require("../../data/movies");
+const DirectorsData = require("../../data/directors");
+const contextMock = require("../../mocks/context.mock");
 
 describe("actor", () => {
   let moviesData;

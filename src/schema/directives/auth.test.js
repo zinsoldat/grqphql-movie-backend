@@ -1,6 +1,6 @@
 const { AuthDirective } = require("./auth");
-const contextMock = require("../mocks/context.mock");
-const directiveConfig = require("../mocks/directiveConfig.mock");
+const contextMock = require("../../mocks/context.mock");
+const directiveConfig = require("../../mocks/directiveConfig.mock");
 
 describe("auth", () => {
   describe("AuthDirective", () => {

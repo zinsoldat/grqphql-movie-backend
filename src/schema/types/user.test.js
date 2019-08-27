@@ -1,5 +1,5 @@
 const user = require("./user");
-const contextMock = require("../mocks/context.mock");
+const contextMock = require("../../mocks/context.mock");
 
 describe("user", () => {
   let testUser;

@@ -1,41 +1,15 @@
 const { gql } = require("apollo-server-express");
-const { GraphQLScalarType, Kind } = require("graphql");
 
-const actor = require("./actor");
-const director = require("./director");
-const movie = require("./movie");
-const user = require("./user");
+const actor = require("./types/actor");
+const director = require("./types/director");
+const movie = require("./types/movie");
+const user = require("./types/user");
+const date = require("./types/date");
 
-const { AuthDirective } = require("../directives/auth");
-
-const dateScalarType = new GraphQLScalarType({
-  name: "Date",
-  description: "Date formatted as ISO string",
-  serialize(value) {
-    if(value instanceof Date) {
-      return value.toISOString();
-    }
-    return null;
-  },
-  parseValue(value) {
-    if(typeof value === "string") {
-      const parsedValue = new Date(value);
-      return isNaN(parsedValue) ? null : parsedValue;
-    }
-    return null;
-  },
-  parseLiteral(ast) {
-    if(ast.kind === Kind.STRING) {
-      return new Date(ast.value);
-    }
-    return null;
-  },
-});
+const { AuthDirective } = require("./directives/auth");
 
 const typeDef = gql`
   directive @auth on FIELD_DEFINITION
-
-  scalar Date
   
   type Query {
     movies: [Movie]
@@ -48,10 +22,7 @@ const resolvers = {
       return context.data.movie.getMovies();
     },
   },
-  Date: dateScalarType,
 };
-
-
 
 module.exports = {
   typeDefs: [
@@ -59,6 +30,7 @@ module.exports = {
     director.typeDef,
     movie.typeDef,
     user.typeDef,
+    date.typeDef,
     typeDef,
   ],
   schemaDirectives: {
@@ -69,6 +41,7 @@ module.exports = {
     movie.resolvers, 
     actor.resolvers, 
     director.resolvers,
+    date.resolvers,
     user.resolvers
   ),
 };
