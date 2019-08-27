@@ -3,7 +3,7 @@ const { gql } = require("apollo-server-express");
 const typeDef = gql`
   type Actor {
     name: String
-    birthday: Date
+    birthday: Date @date
     country: String
     " should directors not be part of the Movie? "
     directors: [Director]

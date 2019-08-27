@@ -4,7 +4,7 @@ const { gql } = require("apollo-server-express");
 const typeDef = gql`
   type Director {
     name: String
-    birthday: Date
+    birthday: Date @date
     country: String
   }
 `;

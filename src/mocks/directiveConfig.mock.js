@@ -2,7 +2,7 @@ module.exports = {
   createDirectiveConfig(context) {
     return {
       name: "",
-      args: "",
+      args: {},
       visitedType: "",
       schema: {},
       context: context,

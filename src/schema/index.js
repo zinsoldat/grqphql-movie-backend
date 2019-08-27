@@ -7,9 +7,14 @@ const user = require("./types/user");
 const date = require("./types/date");
 
 const { AuthDirective } = require("./directives/auth");
+const { DateDirective } = require("./directives/dateFormat");
 
 const typeDef = gql`
   directive @auth on FIELD_DEFINITION
+  
+  directive @date(
+    defaultFormat: String = "dd.mm.yyyy"
+  ) on FIELD_DEFINITION
   
   type Query {
     movies: [Movie]
@@ -34,7 +39,8 @@ module.exports = {
     typeDef,
   ],
   schemaDirectives: {
-    auth: AuthDirective
+    auth: AuthDirective,
+    date: DateDirective,
   },
   resolvers: Object.assign(
     resolvers,
