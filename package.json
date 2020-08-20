@@ -16,7 +16,7 @@
     "graphql": "14.4.2",
     "graphql-tools": "4.0.5",
     "uuid": "3.3.2",
-    "bcrypt": "3.0.6",
+    "bcrypt": "5.0.0",
     "dateformat": "3.0.3"
   },
   
